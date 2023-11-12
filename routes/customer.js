@@ -2,50 +2,16 @@ const express = require('express');
 const router = express.Router();
 
 const Customer = require('../model/customerModel');
+const controller = require('../controller/customerController');
 
-router.get('/', async (req, res) => {
-    const customers = await Customer.find({});
+router.get('/', controller.getAll);
 
-    res.status(200).json({
-        success: true,
-        data: customers
-    });
-});
+router.get('/:id', controller.getById);
 
-router.get('/:id', async(req, res) => {
+router.post('/', controller.create);
 
-    const customer = await Customer.findById(req.params.id);
+router.put('/:id', controller.update);
 
-    res.status(200).json({
-        success: true,
-        data: customer
-    });
-});
-
-router.post('/', async (req, res) => {
-    const customer = await Customer.create(req.body);
-    res.status(200).json({
-        success: true,
-        data: customer
-    });
-});
-
-router.put('/:id', async(req, res) => {
-    const customer = await Customer.findByIdAndUpdate(req.params.id, req.body);
-    const updatedCustomer = await Customer.findById(req.params.id);
-    res.status(200).json({
-        success: true,
-        data: updatedCustomer
-    });
-});
-
-router.delete('/:id', async(req, res) => {
-    const customer = await Customer.findByIdAndDelete(req.params.id);
-
-    res.status(200).json({
-        success: true,
-        data: customer
-    });
-});
+router.delete('/:id',controller.delete);
 
 module.exports = router;
