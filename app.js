@@ -15,10 +15,31 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-   /* console.log(req.body.id);
-    console.log(req.body.name);*/
+    /* console.log(req.body.id);
+     console.log(req.body.name);*/
     console.log(req.body)
-   res.send(req.body);
+    res.send(req.body);
+});
+
+app.get('/customers', (req, res) => {
+    res.send("Customers GET");
+});
+
+app.post('/customers', (req, res) => {
+    res.send(req.body);
+})
+
+app.delete("/customers/:id", (req, res) => {
+    res.send(`Customer with id ${req.params.id} is deleted`);
+})
+
+app.put('/customers/:id', (req, res) => {
+    console.log(req.body);
+    res.send(`Customer with id ${req.params.id} is updated.`);
+})
+
+app.get('/customers/:id', (req, res) => {
+    res.send(`Customer with id ${req.params.id} is fetched.`);
 });
 
 //open server on port 3000
