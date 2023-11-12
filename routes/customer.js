@@ -30,12 +30,22 @@ router.post('/', async (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
-    res.send(`Customer with id ${req.params.id} is updated.`);
+router.put('/:id', async(req, res) => {
+    const customer = await Customer.findByIdAndUpdate(req.params.id, req.body);
+    const updatedCustomer = await Customer.findById(req.params.id);
+    res.status(200).json({
+        success: true,
+        data: updatedCustomer
+    });
 });
 
-router.delete('/:id', (req, res) => {
-    res.send(`Customer with id ${req.params.id} is deleted.`);
+router.delete('/:id', async(req, res) => {
+    const customer = await Customer.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+        success: true,
+        data: customer
+    });
 });
 
 module.exports = router;
