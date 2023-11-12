@@ -3,12 +3,23 @@ const router = express.Router();
 
 const Customer = require('../model/customerModel');
 
-router.get('/', (req, res) => {
-    res.send("Customers GET");
+router.get('/', async (req, res) => {
+    const customers = await Customer.find({});
+
+    res.status(200).json({
+        success: true,
+        data: customers
+    });
 });
 
-router.get('/:id', (req, res) => {
-    res.send(`Customer with id ${req.params.id} is fetched.`);
+router.get('/:id', async(req, res) => {
+
+    const customer = await Customer.findById(req.params.id);
+
+    res.status(200).json({
+        success: true,
+        data: customer
+    });
 });
 
 router.post('/', async (req, res) => {
