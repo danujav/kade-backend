@@ -8,7 +8,7 @@ const port = 3000;
 //declare a route for GET /
 app.get('/', (req, res) => {
     console.log('Hello Express!');
-    res.send("<h1>Hello Express!</h1>");
+    res.send("<h1>Lamai!</h1>");
 })
 
 //open server on port 3000
